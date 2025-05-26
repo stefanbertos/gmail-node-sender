@@ -1,0 +1,47 @@
+{
+  "name": "gmail-sender",
+  "version": "1.0.0",
+  "description": "Send email via gmail smtp server",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --check .",
+    "test": "jest",
+    "test:integration": "jest --config=jest.integration.config.js __tests__/integration/integration.test.ts",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stefanbertos/gmail-sender.git"
+  },
+  "keywords": [
+    "gmail",
+    "email",
+    "nodejs",
+    "typescript"
+  ],
+  "author": "Stefan Bertos",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.0.0",
+    "@types/nodemailer": "^6.4.17",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^10.1.5",
+    "jest": "^29.0.0",
+    "prettier": "^3.0.0",
+    "ts-jest": "^29.0.0",
+    "typescript": "^5.0.0",
+    "typescript-eslint": "^8.32.1"
+  },
+  "dependencies": {
+    "nodemailer": "^7.0.3"
+  },
+  "engines": {
+    "node": ">=22.0.0 <23.0.0"
+  }
+}
