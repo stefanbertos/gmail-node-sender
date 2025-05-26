@@ -7,9 +7,7 @@ const testTo = process.env.GMAIL_TEST_TO;
 describe('Integration: sendEmail', () => {
   it('should send a real email using real credentials', async () => {
     if (!gmailUser || !gmailPass || !testTo) {
-      throw new Error(
-        'Missing GMAIL_USER, GMAIL_PASS, or GMAIL_TEST_TO environment variables'
-      );
+      throw new Error('Missing GMAIL_USER, GMAIL_PASS, or GMAIL_TEST_TO environment variables');
     }
     const auth: GmailAuth = { user: gmailUser, pass: gmailPass };
     const message: GmailMessage = {

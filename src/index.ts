@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+import nodemailer from 'nodemailer';
 
 // Interfaces for input and response
 export interface GmailAuth {
@@ -45,13 +45,13 @@ export function setGmailSenderLogger(customLogger: GmailSenderLogger) {
  */
 export async function sendEmail(
   auth: GmailAuth,
-  message: GmailMessage
+  message: GmailMessage,
 ): Promise<GmailSendResponse> {
   logger.log('[GmailSender] Sending email', { ...message });
   try {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
-      auth
+      auth,
     });
 
     const info = await transporter.sendMail({
@@ -60,7 +60,7 @@ export async function sendEmail(
       bcc: message.bcc,
       subject: message.subject,
       html: message.html,
-      replyTo: message.replyTo || message.from
+      replyTo: message.replyTo || message.from,
     });
 
     logger.log('[GmailSender] response', info);
