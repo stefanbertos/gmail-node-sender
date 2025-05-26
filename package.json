@@ -1,5 +1,5 @@
 {
-  "name": "gmail-sender",
+  "name": "gmail-node-sender",
   "version": "1.0.0",
   "description": "Send email via gmail smtp server",
   "main": "dist/index.js",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stefanbertos/gmail-sender.git"
+    "url": "https://github.com/stefanbertos/gmail-node-sender.git"
   },
   "keywords": [
     "gmail",
