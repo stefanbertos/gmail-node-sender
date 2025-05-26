@@ -14,9 +14,7 @@ describe('sendEmail', () => {
   });
 
   it('should send email with correct params', async () => {
-    mockSendMail.mockImplementation((opts, cb) =>
-      cb(null, { response: 'ok', accepted: ['to@email.com'] }),
-    );
+    mockSendMail.mockResolvedValueOnce({ response: 'ok', accepted: ['to@email.com'] });
     const auth: GmailAuth = { user: 'test@gmail.com', pass: 'password' };
     const message: GmailMessage = {
       from: 'test@gmail.com',
@@ -33,12 +31,11 @@ describe('sendEmail', () => {
         subject: message.subject,
         html: message.html,
       }),
-      expect.any(Function),
     );
   });
 
   it('should handle errors from nodemailer', async () => {
-    mockSendMail.mockImplementation((opts, cb) => cb(new Error('fail'), null));
+    mockSendMail.mockRejectedValueOnce(new Error('fail'));
     const auth: GmailAuth = { user: 'test@gmail.com', pass: 'password' };
     const message: GmailMessage = {
       from: 'test@gmail.com',
