@@ -1,4 +1,4 @@
-import { sendEmail, GmailAuth, GmailMessage, GmailSendResponse } from '../src';
+import { sendEmail, GmailNodeSenderAuth, GmailNodeSenderMessage, GmailNodeSenderSendResponse } from '../src';
 import nodemailer from 'nodemailer';
 
 jest.mock('nodemailer');
@@ -15,14 +15,14 @@ describe('sendEmail', () => {
 
   it('should send email with correct params', async () => {
     mockSendMail.mockResolvedValueOnce({ response: 'ok', accepted: ['to@email.com'] });
-    const auth: GmailAuth = { user: 'test@gmail.com', pass: 'password' };
-    const message: GmailMessage = {
+    const auth: GmailNodeSenderAuth = { user: 'test@gmail.com', pass: 'password' };
+    const message: GmailNodeSenderMessage = {
       from: 'test@gmail.com',
       to: 'to@email.com',
       subject: 'Test',
       html: '<b>Hello</b>',
     };
-    const result = await sendEmail(auth, message);
+    const result: GmailNodeSenderSendResponse = await sendEmail(auth, message);
     expect(result.success).toBe(true);
     expect(mockSendMail).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -36,14 +36,14 @@ describe('sendEmail', () => {
 
   it('should handle errors from nodemailer', async () => {
     mockSendMail.mockRejectedValueOnce(new Error('fail'));
-    const auth: GmailAuth = { user: 'test@gmail.com', pass: 'password' };
-    const message: GmailMessage = {
+    const auth: GmailNodeSenderAuth = { user: 'test@gmail.com', pass: 'password' };
+    const message: GmailNodeSenderMessage = {
       from: 'test@gmail.com',
       to: 'to@email.com',
       subject: 'Test',
       html: '<b>Hello</b>',
     };
-    const result = await sendEmail(auth, message);
+    const result: GmailNodeSenderSendResponse = await sendEmail(auth, message);
     expect(result.success).toBe(false);
     expect(result.error).toBeDefined();
   });

@@ -1,9 +1,9 @@
-# gmail-sender
+# gmail-node-sender
 
 To use the library, install it with:
 
 ```sh
-npm install gmail-sender
+npm install gmail-node-sender
 ```
 
 **Requires Node.js 22.x**
@@ -18,12 +18,12 @@ There are no internal default values for sending email. All fields must be provi
 ## Interfaces
 
 ```typescript
-export interface GmailAuth {
+export interface GmailNodeSenderAuth {
   user: string; // Gmail address
   pass: string; // Gmail App Password
 }
 
-export interface GmailMessage {
+export interface GmailNodeSenderMessage {
   from: string; // Sender Gmail address
   to: string | string[]; // Recipient(s)
   bcc?: string | string[]; // Optional BCC
@@ -32,27 +32,32 @@ export interface GmailMessage {
   replyTo?: string; // Optional reply-to address
 }
 
-export interface GmailSendResponse {
+export interface GmailNodeSenderSendResponse {
   success: boolean;
   info?: unknown; // Nodemailer info object
   error?: unknown; // Error if failed
 }
+
+export type GmailNodeSenderLogger = {
+  log: (...args: unknown[]) => void;
+  error: (...args: unknown[]) => void;
+};
 ```
 
 ## Example Usage
 
 ```typescript
-import { sendEmail, GmailAuth, GmailMessage } from 'gmail-sender';
+import { sendEmail, GmailNodeSenderAuth, GmailNodeSenderMessage } from 'gmail-node-sender';
 
-const auth: GmailAuth = {
+const auth: GmailNodeSenderAuth = {
   user: 'your.email@gmail.com',
   pass: 'your-app-password',
 };
 
-const message: GmailMessage = {
+const message: GmailNodeSenderMessage = {
   from: 'your.email@gmail.com',
   to: 'recipient@example.com',
-  subject: 'Hello from gmail-sender',
+  subject: 'Hello from gmail-node-sender',
   html: '<b>This is a test email</b>',
 };
 
@@ -70,9 +75,9 @@ sendEmail(auth, message).then((response) => {
 You can provide a custom logger to capture logs and errors:
 
 ```typescript
-import { setGmailSenderLogger } from 'gmail-sender';
+import { setGmailNodeSenderLogger } from 'gmail-node-sender';
 
-setGmailSenderLogger({
+setGmailNodeSenderLogger({
   log: (...args) => {
     /* custom log logic */
   },
@@ -84,6 +89,6 @@ setGmailSenderLogger({
 
 ## Badges
 
-[![Build Status](https://github.com/stefanbertos/bulkgate-sms/actions/workflows/ci.yml/badge.svg)](https://github.com/stefanbertos/bulkgate-sms/actions/workflows/ci.yml)
-[![npm version](https://img.shields.io/npm/v/bulkgate-sms.svg?style=flat-square)](https://www.npmjs.com/package/bulkgate-sms)
+[![Build Status](https://github.com/stefanbertos/gmail-node-sender/actions/workflows/ci.yml/badge.svg)](https://github.com/stefanbertos/gmail-node-sender/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/gmail-node-sender.svg?style=flat-square)](https://www.npmjs.com/package/gmail-node-sender)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)

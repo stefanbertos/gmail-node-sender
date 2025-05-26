@@ -22,18 +22,18 @@ export interface GmailSendResponse {
 }
 
 // Global logger setup
-export type GmailSenderLogger = {
+export type GmailNodeSenderLogger = {
   log: (...args: unknown[]) => void;
   error: (...args: unknown[]) => void;
 };
 
-let logger: GmailSenderLogger = console;
+let logger: GmailNodeSenderLogger = console;
 
 /**
- * Set a custom logger for gmail-sender library.
+ * Set a custom logger for gmail-node-sender library.
  * @param customLogger An object with `log` and `error` methods.
  */
-export function setGmailSenderLogger(customLogger: GmailSenderLogger) {
+export function setGmailNodeSenderLogger(customLogger: GmailNodeSenderLogger) {
   logger = customLogger;
 }
 
@@ -47,7 +47,7 @@ export async function sendEmail(
   auth: GmailAuth,
   message: GmailMessage,
 ): Promise<GmailSendResponse> {
-  logger.log('[GmailSender] Sending email', { ...message });
+  logger.log('[GmailNodeSender] Sending email', { ...message });
   try {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -63,10 +63,10 @@ export async function sendEmail(
       replyTo: message.replyTo || message.from,
     });
 
-    logger.log('[GmailSender] response', info);
+    logger.log('[GmailNodeSender] response', info);
     return { success: true, info };
   } catch (error) {
-    logger.error('[GmailSender] error', error);
+    logger.error('[GmailNodeSender] error', error);
     return { success: false, error };
   }
 }

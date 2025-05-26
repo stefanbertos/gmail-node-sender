@@ -1,4 +1,4 @@
-import { sendEmail, GmailAuth, GmailMessage } from '../../src';
+import { sendEmail, GmailNodeSenderAuth, GmailNodeSenderMessage } from '../../src';
 
 const gmailUser = process.env.GMAIL_USER;
 const gmailPass = process.env.GMAIL_PASS;
@@ -9,8 +9,8 @@ describe('Integration: sendEmail', () => {
     if (!gmailUser || !gmailPass || !testTo) {
       throw new Error('Missing GMAIL_USER, GMAIL_PASS, or GMAIL_TEST_TO environment variables');
     }
-    const auth: GmailAuth = { user: gmailUser, pass: gmailPass };
-    const message: GmailMessage = {
+    const auth: GmailNodeSenderAuth = { user: gmailUser, pass: gmailPass };
+    const message: GmailNodeSenderMessage = {
       from: gmailUser,
       to: testTo,
       subject: 'Integration test email',
