@@ -1,12 +1,12 @@
 import nodemailer from 'nodemailer';
 
 // Interfaces for input and response
-export interface GmailAuth {
+export interface GmailNodeSenderAuth {
   user: string;
   pass: string;
 }
 
-export interface GmailMessage {
+export interface GmailNodeSenderMessage {
   from: string;
   to: string | string[];
   bcc?: string | string[];
@@ -15,7 +15,7 @@ export interface GmailMessage {
   replyTo?: string;
 }
 
-export interface GmailSendResponse {
+export interface GmailNodeSenderSendResponse {
   success: boolean;
   info?: unknown;
   error?: unknown;
@@ -41,12 +41,12 @@ export function setGmailNodeSenderLogger(customLogger: GmailNodeSenderLogger) {
  * Sends an email using Gmail and nodemailer.
  * @param auth Gmail authentication details.
  * @param message Email message details.
- * @returns GmailSendResponse
+ * @returns GmailNodeSenderSendResponse
  */
 export async function sendEmail(
-  auth: GmailAuth,
-  message: GmailMessage,
-): Promise<GmailSendResponse> {
+  auth: GmailNodeSenderAuth,
+  message: GmailNodeSenderMessage,
+): Promise<GmailNodeSenderSendResponse> {
   logger.log('[GmailNodeSender] Sending email', { ...message });
   try {
     const transporter = nodemailer.createTransport({
