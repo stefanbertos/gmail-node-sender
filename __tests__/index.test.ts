@@ -1,4 +1,9 @@
-import { sendEmail, GmailNodeSenderAuth, GmailNodeSenderMessage, GmailNodeSenderSendResponse } from '../src';
+import {
+  sendEmail,
+  GmailNodeSenderAuth,
+  GmailNodeSenderMessage,
+  GmailNodeSenderSendResponse,
+} from '../src';
 import nodemailer from 'nodemailer';
 
 jest.mock('nodemailer');
